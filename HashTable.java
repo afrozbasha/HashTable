@@ -13,7 +13,7 @@ public class HashTable {
         this.size = 0;
     }
     public HashTable() {
-        this(10);
+        this(100);
     }
 
     //Create HashNode like Linked list one link and two data types
@@ -70,26 +70,67 @@ public class HashTable {
         }
         return wordCount;
     }
+    
+    public String getKeyValue(Integer key){
+        int arrayIndex = getArrayIndex(key);
+        HashNode head = Array[arrayIndex];
+        while (head != null){
+            if (head.key.equals(key)){
+                return head.value;
+            }
+            head = head.next;
+        }
+        return null;
+    }
+
+    public void inputParagraph(int index) {
+        String sentence = "Paranoids are not paranoid because they are paranoid but because they keep putting themselves deliberately into paranoid avoidable situations";
+        System.out.println(sentence);
+        String array[] = sentence.split(" ");
+        HashTable hashTableWord = new HashTable();
+        HashNode head = Array[index];
+
+        int i =1;
+
+        for (String word : array) {
+            hashTableWord.putData(i, word);
+            System.out.println(hashTableWord.getKeyValue(i));
+            i++;
+        }
+        HashNode node = Array[0];
+        int freW = 0, j=0;
+        while (node != null) {
+            if (node.value.equals(array[j++])) {
+                freW++;
+            }
+            node = node.next;
+        }
+    }
 
 
     public static void main(String[] args) {
-        //Create obj hashTable HashTable and HashNode like Linked list by using HashTable class
         HashTable hashTable = new HashTable();
-        hashTable.putData(10, "To");
-        hashTable.putData(20, "be");
-        hashTable.putData(30, "or");
-        hashTable.putData(40, "not");
-        hashTable.putData(50, "to");
-        hashTable.putData(60, "be");
-
-        //Checking "To", "be", "or", "not" no.of times in HashTable
-        System.out.println("Frequency of To : "+hashTable.freqChecker("To"));
-        System.out.println("Frequency of be : "+hashTable.freqChecker("be"));
-        System.out.println("Frequency of or : "+hashTable.freqChecker("or"));
-        System.out.println("Frequency of not : "+hashTable.freqChecker("not"));
+        hashTable.inputParagraph(20);
 
         //Checking size of the HashTable
         System.out.println("The size of hash table : " + hashTable.size);
+
+
+        //Create obj hashTable HashTable and HashNode like Linked list by using HashTable class
+//        HashTable hashTable = new HashTable();
+//        hashTable.putData(10, "To");
+//        hashTable.putData(20, "be");
+//        hashTable.putData(30, "or");
+//        hashTable.putData(40, "not");
+//        hashTable.putData(50, "to");
+//        hashTable.putData(60, "be");
+
+
+//        //Checking "To", "be", "or", "not" no.of times in HashTable
+//        System.out.println("Frequency of To : "+hashTable.freqChecker("To"));
+//        System.out.println("Frequency of be : "+hashTable.freqChecker("be"));
+//        System.out.println("Frequency of or : "+hashTable.freqChecker("or"));
+//        System.out.println("Frequency of not : "+hashTable.freqChecker("not"));
 
     }
 }
